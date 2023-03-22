@@ -2,6 +2,13 @@
   color: red;
 }
 
-body {
-  background-color: bisque;
+.footer-text {
+  display: block;
+  padding: 3em;
+}
+
+.dark-background {
+  height: 2em;
+  width: 100%;
+  background-color: gray;
 }

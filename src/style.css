@@ -118,3 +118,28 @@ li div {
   cursor: pointer;
   background-color: wheat;
 }
+
+.pop-background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: rgba(136, 136, 136, 0.733);
+}
+
+.pop {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20%;
+}
+
+.close-cross {
+  width: 30px;
+  position: relative;
+  left: 45%;
+  top: 0.5em;
+}

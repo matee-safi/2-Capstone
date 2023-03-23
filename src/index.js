@@ -1,5 +1,33 @@
 import './style.css';
 import navLogo from './images/restaurant.png';
+import crossIcon from './images/remove.png'
+
+const popup = () => {
+  const popBackground = document.createElement('div');
+  popBackground.classList.add('pop-background');
+  const pop = document.createElement('div');
+  pop.classList.add('pop');
+  const closeCross = document.createElement('img');
+  closeCross.src = crossIcon;
+  closeCross.classList.add('close-cross');
+  const cardImg = document.createElement('img');
+  // cardImg.src = meal.strMealThumb;
+  const cardName = document.createElement('p');
+  // cardName.innerHTML = meal.strMeal;
+  const ingredients = document.createElement('div');
+  ingredients.innerHTML = `
+  <p>Ingrediants</p>
+  `;
+  pop.appendChild(closeCross);
+  pop.appendChild(cardImg);
+  pop.appendChild(cardName);
+  pop.appendChild(ingredients);
+  popBackground.appendChild(pop);
+  document.body.appendChild(popBackground);
+  closeCross.addEventListener('click', () => {
+    popBackground.remove();
+  })
+}
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -50,7 +78,7 @@ async function displayMeals() {
           <button class="like-btn">
             <i class="fas fa-heart">Like</i>
           </button></div>
-          <button class="comment-btn">Comment</button>
+          <button onclick="popup" class="comment-btn">Comment</button>
           <button class="reservation-btn">Reservations</button>
         </li>
       `)

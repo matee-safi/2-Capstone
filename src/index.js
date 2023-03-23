@@ -7,6 +7,7 @@ document.querySelector('.nav-logo').src = navLogo;
 const API_KEY = '1';
 const API_URL = `https://www.themealdb.com/api/json/v1/${API_KEY}`;
 const API_LINK = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
+const INVOLV_API_KEY = '9uvruX8VsHf7B0nGETkN';
 const mealsList = document.querySelector('#meals-list');
 const mealDetails = document.querySelector('#meal-details');
 
@@ -26,16 +27,32 @@ async function fetchMealById(id) {
 
 // Function to add a like for a meal by ID
 async function addLikeById(id) {
-  const response = await fetch(`${API_LINK}api/v1/likes/`, {
+  const response = await fetch(`${API_LINK}apps/${INVOLV_API_KEY}/likes/`, {
     method: 'POST',
     body: JSON.stringify({
-      item_id: id,
+      item_id: `${id}`,
     }),
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'Content-type': 'application/json',
     },
   });
-  const data = await response.json();
+  if (response) {
+    const likesSpan = document.getElementById(`${`${id}` + 'likes'}`)
+    likesSpan.innerText = parseInt(likesSpan.innerText) + 1;
+  
+
+  return 'worked';
+}
+
+// Function to fetch like for a meal by ID
+async function fetchLikes() {
+  const response = await fetch(`${API_LINK}apps/${INVOLV_API_KEY}/likes/`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const data = response.json();
   return data;
 }
 
@@ -47,14 +64,35 @@ async function displayMeals() {
         <li data-meal-id="${meal.idMeal}">
           <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
           <div><span>${meal.strMeal}</span>
-          <button class="like-btn">
-            <i class="fas fa-heart">Like</i>
+          <button id="${meal.idMeal}" class="like-btn">
+            <i style="pointer-events: none;" class="fas fa-heart">Like</i>
+            <span style="pointer-events: none;" id="${`${meal.idMeal}likes`}" >0</span>
           </button></div>
           <button class="comment-btn">Comment</button>
           <button class="reservation-btn">Reservations</button>
         </li>
       `)
     .join('');
+
+  fetchLikes().then((res) => {
+    res.forEach((item) => {
+      if (item.item_id !== 'undefined' && item.item_id !== '123') {
+        const likesSpan = document.getElementById(`${`${item.item_id}likes`}`);
+        likesSpan.innerHTML = item.likes;
+      }
+    });
+  });
+
+  const likeButtons = document.querySelectorAll('.like-btn');
+
+  likeButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      if (e.target.className === 'like-btn') {
+        const mealId = e.target.id;
+        addLikeById(mealId);
+      }
+    });
+  });
 }
 
 // Function to display meal details
@@ -93,6 +131,5 @@ document.addEventListener('click', (e) => {
     displayMealDetails(mealId);
   }
 });
-
 // Display meals list on page load
-displayMeals();
+displayMeals()

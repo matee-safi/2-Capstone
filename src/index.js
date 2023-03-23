@@ -1,4 +1,7 @@
 import './style.css';
+import navLogo from './images/restaurant.png';
+
+document.querySelector('.nav-logo').src = navLogo;
 
 // Define variables
 const API_KEY = '1';
@@ -43,10 +46,12 @@ async function displayMeals() {
     .map((meal) => `
         <li data-meal-id="${meal.idMeal}">
           <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-          <span>${meal.strMeal}</span>
+          <div><span>${meal.strMeal}</span>
           <button class="like-btn">
-            <i class="fas fa-heart"></i>
-          </button>
+            <i class="fas fa-heart">Like</i>
+          </button></div>
+          <button class="comment-btn">Comment</button>
+          <button class="reservation-btn">Reservations</button>
         </li>
       `)
     .join('');

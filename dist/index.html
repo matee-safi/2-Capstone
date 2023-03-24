@@ -1,1 +1,35 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wbpack Exercise</title><script defer="defer" src="main.js"></script></head><body><h1>Hello webpack!</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wbpack Exercise</title>
+    <!--<script type="module" src="./index.js" defer></script>-->
+    <script type="module" src="src/index.js"></script>
+    <script src="dist/bundle.js"></script>
+<script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
+<body>
+    <header>
+        <img class="nav-logo" alt="Logo">
+        <p class="title">Available Meals </p>
+        <ul class="nav">
+            <li class="tab"><a href="#">Home</a></li>
+            <li><hr></li>
+            <li class="tab"><a href="#">About</a></li>
+            <li><hr></li>
+            <li class="tab"><a href="#">Contact</a></li>
+        </ul>
+    </header>
+    <main>
+        <ul id="meals-list"></ul>
+        <div id="meal-details"></div>
+    </main>
+    <footer>
+        <div class="footer-text">Created by Matee Safi and Therese Tuyisabe under CC licence</div>
+        <div class="dark-background">
+        </div>
+    </footer>
+    <script type="module" src="src/index.js"></script>
+    <script src="dist/main.bundle.js"></script>
+</body>
+</html>

@@ -24,7 +24,6 @@ async function fetchMealById(id) {
   const data = await response.json();
   return data.meals[0];
 }
-
 // Function to add a like for a meal by ID
 async function addLikeById(id) {
   const response = await fetch(`${API_LINK}apps/${INVOLV_API_KEY}/likes/`, {
@@ -37,13 +36,13 @@ async function addLikeById(id) {
     },
   });
   if (response) {
-    const likesSpan = document.getElementById(`${`${id}` + 'likes'}`)
-    likesSpan.innerText = parseInt(likesSpan.innerText) + 1;
-  
+    // eslint-disable-next-line no-useless-concat
+    const likesSpan = document.getElementById(`${`${id}` + 'likes'}`);
+    likesSpan.innerText = parseInt(likesSpan.innerText, 10) + 1;
+  }
 
   return 'worked';
 }
-
 // Function to fetch like for a meal by ID
 async function fetchLikes() {
   const response = await fetch(`${API_LINK}apps/${INVOLV_API_KEY}/likes/`, {
@@ -132,4 +131,4 @@ document.addEventListener('click', (e) => {
   }
 });
 // Display meals list on page load
-displayMeals()
+displayMeals();

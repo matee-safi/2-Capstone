@@ -125,7 +125,10 @@ li div {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: rgba(136, 136, 136, 0.733);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  z-index: 1040;
+  overflow: scroll;
 }
 
 .pop {
@@ -134,7 +137,29 @@ li div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20%;
+  margin: 5% 20%;
+  padding-bottom: 5%;
+  border-radius: 1em;
+}
+
+.pop h2 {
+  font-size: 2.5em;
+}
+
+.pop h3 {
+  font-size: 2em;
+}
+
+.pop p {
+  margin: 2% 5%;
+  font-size: large;
+}
+
+.pop-image {
+  /* height: 200px; */
+  width: 50%;
+  margin: 5%;
+  border-radius: 100%;
 }
 
 .close-cross {
@@ -142,4 +167,5 @@ li div {
   position: relative;
   left: 45%;
   top: 0.5em;
+  cursor: pointer;
 }

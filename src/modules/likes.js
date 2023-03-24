@@ -1,3 +1,5 @@
+const API_LINK = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
+
 const likeButtons = document.querySelectorAll('.like-btn');
 
 likeButtons.forEach((button) => {

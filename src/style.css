@@ -36,7 +36,7 @@ header {
   color: rgb(27, 2, 2);
   display: flex;
   gap: 1em;
-  align-items: center;
+  align-items: end;
 }
 
 .nav li a {

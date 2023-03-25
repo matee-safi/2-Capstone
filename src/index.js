@@ -1,5 +1,6 @@
 import './style.css';
 import navLogo from './images/restaurant.png';
+import crossIcon from './images/remove.png';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -60,7 +61,7 @@ async function displayMeals() {
   const meals = await fetchMeals();
   mealsList.innerHTML = meals
     .map((meal) => `
-        <li data-meal-id="${meal.idMeal}">
+        <li id="${meal.idMeal}">
           <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
           <div><span>${meal.strMeal}</span>
           <button id="${meal.idMeal}" class="like-btn">
@@ -131,4 +132,47 @@ document.addEventListener('click', (e) => {
   }
 });
 // Display meals list on page load
-displayMeals();
+
+const popup = async (e) => {
+  const popBackground = document.createElement('div');
+  popBackground.classList.add('pop-background');
+  const pop = document.createElement('div');
+  pop.classList.add('pop');
+  const closeCross = document.createElement('img');
+  closeCross.src = crossIcon;
+  closeCross.classList.add('close-cross');
+  const cardImg = document.createElement('img');
+  const cardTitle = document.createElement('h2');
+  cardImg.classList.add('pop-image');
+  const instructiontitle = document.createElement('h3');
+  instructiontitle.innerHTML = 'Instructions: ';
+  const cardInstructions = document.createElement('p');
+  const mealItem = e.target.parentElement;
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItem.id}`);
+  const data = await response.json();
+  cardInstructions.innerHTML = data.meals[0].strInstructions;
+  cardTitle.innerHTML = data.meals[0].strMeal;
+  cardImg.src = data.meals[0].strMealThumb;
+  pop.appendChild(closeCross);
+  pop.appendChild(cardTitle);
+  pop.appendChild(cardImg);
+  pop.appendChild(instructiontitle);
+  pop.appendChild(cardInstructions);
+  popBackground.appendChild(pop);
+  document.body.appendChild(popBackground);
+  closeCross.addEventListener('click', () => {
+    popBackground.remove();
+    document.body.style.overflow = '';
+  });
+  document.body.style.overflow = 'hidden';
+};
+
+const addCommentEvent = async () => {
+  await displayMeals();
+  const commentBtn = document.querySelectorAll('.comment-btn');
+  commentBtn.forEach((btn) => {
+    btn.addEventListener('click', popup);
+  });
+};
+
+addCommentEvent();

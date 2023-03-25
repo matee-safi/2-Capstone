@@ -5,6 +5,10 @@ import getComments from './modules/getComment.js';
 import submit from './modules/postComment.js';
 import countMeals from './counteMeal.js';
 
+import submit from './modules/postComment';
+import commentCounter from './modules/commentCounter.js';
+
+
 document.querySelector('.nav-logo').src = navLogo;
 
 // Define variables
@@ -206,8 +210,8 @@ const popup = async (e) => {
       commentList.innerHTML += `
       <li>${element.creation_date} ${element.username}: ${element.comment}</li>
       `;
-      commentTitle.innerHTML = `Comments(${commentItems.length})`;
     });
+    commentTitle.innerHTML = `Comments(${commentCounter(commentItems)})`;
   }
   comments.appendChild(commentTitle);
   comments.appendChild(commentList);

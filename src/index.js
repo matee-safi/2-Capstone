@@ -1,8 +1,8 @@
 import './style.css';
 import navLogo from './images/restaurant.png';
 import crossIcon from './images/remove.png';
-import { getComments } from './images/modules/getComment';
-import submit from './images/modules/postComment';
+import getComments from './images/modules/getComment.js';
+import submit from './images/modules/postComment.js';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -162,13 +162,13 @@ const popup = async (e) => {
   const comments = document.createElement('div');
   comments.classList.add('comments-container');
   const commentTitle = document.createElement('h3');
-  commentTitle.innerHTML = `Comments(0)`;
+  commentTitle.innerHTML = 'Comments(0)';
   const commentList = document.createElement('ul');
   commentList.classList.add('comment-list');
   commentList.innerHTML = 'No comments';
   const commentItems = await getComments(mealItem.id);
-  if(commentItems.length > 0) {
-    await commentItems.forEach(element => {
+  if (commentItems.length > 0) {
+    await commentItems.forEach((element) => {
       commentList.innerHTML = '';
       commentList.innerHTML += `
       <li>${element.creation_date} ${element.username}: ${element.comment}</li>
@@ -197,7 +197,7 @@ const popup = async (e) => {
   commentForm.appendChild(nameInput);
   commentForm.appendChild(commentInput);
   commentForm.appendChild(submitBtn);
-  submitBtn.addEventListener('click', submit(mealItem.id))
+  submitBtn.addEventListener('click', submit(mealItem.id));
 
   pop.appendChild(closeCross);
   pop.appendChild(cardTitle);

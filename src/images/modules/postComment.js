@@ -2,12 +2,12 @@ const nameInput = document.getElementById('name-input');
 const commentInput = document.getElementById('comment-input');
 
 const submit = async (id) => {
-    preventDefault();
+//   e.preventDefault();
   if (nameInput.value && commentInput.value) {
     const data = {
-      "item_id": id,
-      "username": nameInput.value,
-      "comment": commentInput.value,
+      item_id: id,
+      username: nameInput.value,
+      comment: commentInput.value,
     };
     try {
       const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/9uvruX8VsHf7B0nGETkN/comments', {

@@ -175,7 +175,7 @@ const popup = async (e) => {
       <li>${element.creation_date} ${element.username}: ${element.comment}</li>
       `;
     });
-    commentTitle.innerHTML = 'Comments(<span class=comment-count></span>)';
+    commentTitle.innerHTML = `Comments(${commentCounter(commentItems)})`;
   }
   comments.appendChild(commentTitle);
   comments.appendChild(commentList);
@@ -215,7 +215,6 @@ const popup = async (e) => {
     document.body.style.overflow = '';
   });
   document.body.style.overflow = 'hidden';
-  commentCounter();
 };
 
 const addCommentEvent = async () => {

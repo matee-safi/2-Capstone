@@ -3,6 +3,7 @@ import navLogo from './images/restaurant.png';
 import crossIcon from './images/remove.png';
 import getComments from './modules/getComment.js';
 import submit from './modules/postComment';
+import commentCounter from './modules/commentCounter.js';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -173,8 +174,8 @@ const popup = async (e) => {
       commentList.innerHTML += `
       <li>${element.creation_date} ${element.username}: ${element.comment}</li>
       `;
-      commentTitle.innerHTML = `Comments(${commentItems.length})`;
     });
+    commentTitle.innerHTML = 'Comments(<span class=comment-count></span>)';
   }
   comments.appendChild(commentTitle);
   comments.appendChild(commentList);
@@ -214,6 +215,7 @@ const popup = async (e) => {
     document.body.style.overflow = '';
   });
   document.body.style.overflow = 'hidden';
+  commentCounter();
 };
 
 const addCommentEvent = async () => {

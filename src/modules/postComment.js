@@ -1,8 +1,6 @@
-const nameInput = document.getElementById('name-input');
-const commentInput = document.getElementById('comment-input');
-
 const submit = async (id) => {
-//   e.preventDefault();
+  const nameInput = document.querySelector('.name-input');
+  const commentInput = document.querySelector('.comment-input');
   if (nameInput.value && commentInput.value) {
     const data = {
       item_id: id,
@@ -20,10 +18,12 @@ const submit = async (id) => {
       const result = await response.json();
       console.log('Success:', result);
     } catch (error) {
-      console.error('Error:', error);
+      console.log('error', error);
     }
     nameInput.value = '';
     commentInput.value = '';
+    const popbg = document.querySelector('.pop-background');
+    popbg.remove();
   }
 };
 

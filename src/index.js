@@ -1,8 +1,8 @@
 import './style.css';
 import navLogo from './images/restaurant.png';
 import crossIcon from './images/remove.png';
-import getComments from './images/modules/getComment.js';
-import submit from './images/modules/postComment.js';
+import getComments from './modules/getComment.js';
+import submit from './modules/postComment';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -168,8 +168,8 @@ const popup = async (e) => {
   commentList.innerHTML = 'No comments';
   const commentItems = await getComments(mealItem.id);
   if (commentItems.length > 0) {
+    commentList.innerHTML = '';
     await commentItems.forEach((element) => {
-      commentList.innerHTML = '';
       commentList.innerHTML += `
       <li>${element.creation_date} ${element.username}: ${element.comment}</li>
       `;
@@ -178,7 +178,7 @@ const popup = async (e) => {
   }
   comments.appendChild(commentTitle);
   comments.appendChild(commentList);
-  const commentForm = document.createElement('form');
+  const commentForm = document.createElement('div');
   commentForm.classList.add('add-comment-container');
   const formTitle = document.createElement('h3');
   formTitle.innerHTML = 'Add a Comment';
@@ -193,11 +193,13 @@ const popup = async (e) => {
   const submitBtn = document.createElement('button');
   submitBtn.className = 'submit-btn';
   submitBtn.innerHTML = 'Comment';
+  submitBtn.addEventListener('click', () => {
+    submit(mealItem.id);
+  });
   commentForm.appendChild(formTitle);
   commentForm.appendChild(nameInput);
   commentForm.appendChild(commentInput);
   commentForm.appendChild(submitBtn);
-  submitBtn.addEventListener('click', submit(mealItem.id));
 
   pop.appendChild(closeCross);
   pop.appendChild(cardTitle);

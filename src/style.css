@@ -4,6 +4,27 @@
   box-sizing: border-box;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f00;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #dd3a3a;
+}
+
 .footer-text {
   border-top: 2px solid black;
   display: block;
@@ -151,8 +172,9 @@ li div {
 }
 
 .pop p {
-  margin: 2% 5%;
+  margin: auto;
   font-size: large;
+  margin-bottom: 30px;
 }
 
 .pop-image {
@@ -168,4 +190,52 @@ li div {
   left: 45%;
   top: 0.5em;
   cursor: pointer;
+}
+
+.instruction-container {
+  margin: auto 5%;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  justify-content: start;
+  width: 100%;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.comments-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.add-comment-container input,
+.add-comment-container textarea {
+  padding: 7px;
+  border-radius: 0.5em;
+  border: 1px solid rgb(192, 192, 192);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.submit-btn {
+  background-color: rgba(248, 57, 57, 0.915);
+  color: #fff;
+  width: 60%;
+  border: none !important;
+  padding: 7px;
+  border-radius: 0.5em;
+  border: 1px solid rgb(192, 192, 192);
 }

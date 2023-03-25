@@ -1,6 +1,8 @@
 import './style.css';
 import navLogo from './images/restaurant.png';
 import crossIcon from './images/remove.png';
+import getComments from './modules/getComment.js';
+import submit from './modules/postComment';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -131,8 +133,8 @@ document.addEventListener('click', (e) => {
     displayMealDetails(mealId);
   }
 });
-// Display meals list on page load
 
+// Display meals list on page load
 const popup = async (e) => {
   const popBackground = document.createElement('div');
   popBackground.classList.add('pop-background');
@@ -153,11 +155,58 @@ const popup = async (e) => {
   cardInstructions.innerHTML = data.meals[0].strInstructions;
   cardTitle.innerHTML = data.meals[0].strMeal;
   cardImg.src = data.meals[0].strMealThumb;
+  const InstructionsDiv = document.createElement('div');
+  InstructionsDiv.classList.add('instruction-container');
+  InstructionsDiv.appendChild(instructiontitle);
+  InstructionsDiv.appendChild(cardInstructions);
+  const comments = document.createElement('div');
+  comments.classList.add('comments-container');
+  const commentTitle = document.createElement('h3');
+  commentTitle.innerHTML = 'Comments(0)';
+  const commentList = document.createElement('ul');
+  commentList.classList.add('comment-list');
+  commentList.innerHTML = 'No comments';
+  const commentItems = await getComments(mealItem.id);
+  if (commentItems.length > 0) {
+    commentList.innerHTML = '';
+    await commentItems.forEach((element) => {
+      commentList.innerHTML += `
+      <li>${element.creation_date} ${element.username}: ${element.comment}</li>
+      `;
+      commentTitle.innerHTML = `Comments(${commentItems.length})`;
+    });
+  }
+  comments.appendChild(commentTitle);
+  comments.appendChild(commentList);
+  const commentForm = document.createElement('div');
+  commentForm.classList.add('add-comment-container');
+  const formTitle = document.createElement('h3');
+  formTitle.innerHTML = 'Add a Comment';
+  const nameInput = document.createElement('input');
+  nameInput.type = 'name';
+  nameInput.className = 'name-input';
+  nameInput.placeholder = 'Your name';
+  const commentInput = document.createElement('textarea');
+  commentInput.setAttribute('rows', 5);
+  commentInput.className = 'comment-input';
+  commentInput.placeholder = 'Your insights';
+  const submitBtn = document.createElement('button');
+  submitBtn.className = 'submit-btn';
+  submitBtn.innerHTML = 'Comment';
+  submitBtn.addEventListener('click', () => {
+    submit(mealItem.id);
+  });
+  commentForm.appendChild(formTitle);
+  commentForm.appendChild(nameInput);
+  commentForm.appendChild(commentInput);
+  commentForm.appendChild(submitBtn);
+
   pop.appendChild(closeCross);
   pop.appendChild(cardTitle);
   pop.appendChild(cardImg);
-  pop.appendChild(instructiontitle);
-  pop.appendChild(cardInstructions);
+  pop.appendChild(InstructionsDiv);
+  pop.appendChild(comments);
+  pop.appendChild(commentForm);
   popBackground.appendChild(pop);
   document.body.appendChild(popBackground);
   closeCross.addEventListener('click', () => {

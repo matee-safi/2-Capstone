@@ -61,7 +61,9 @@
 
 ### Key Features <a name="key-features"></a>
 
-> 
+ - You can like a meal by clicking on the like button
+ - You can comment on the meal
+ - You can get instruction about creating a mean by clicking on the popup button
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

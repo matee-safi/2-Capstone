@@ -1,0 +1,246 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f00;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #dd3a3a;
+}
+
+.footer-text {
+  border-top: 2px solid black;
+  display: block;
+  padding: 3em;
+}
+
+.dark-background {
+  height: 2em;
+  width: 100%;
+  background-color: gray;
+}
+
+header {
+  display: flex;
+  height: 70px;
+  background-color: rgba(255, 80, 80, 0.915);
+  padding: 1vh 10%;
+  align-items: center;
+}
+
+.title {
+  color: white;
+  font-size: 2.5vw;
+  font-weight: 700;
+  margin-right: 1em;
+}
+
+.nav {
+  list-style: none;
+  color: rgb(27, 2, 2);
+  display: flex;
+  gap: 1em;
+  align-items: end;
+}
+
+.nav li a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-logo {
+  width: 40px;
+  margin-right: 1em;
+}
+
+body {
+  width: 100vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-size: contain;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Style for the meals list */
+#meals-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 5% 15%;
+  gap: 1vw;
+}
+
+/* Style for each meal item */
+#meals-list li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#meals-list li img {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+#meals-list li .meal-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#meals-list li .meal-info span {
+  font-weight: bold;
+}
+
+#meals-list li .like-btn {
+  display: flex;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+li div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-btn,
+.reservation-btn {
+  display: flex;
+  margin: auto;
+  margin-top: 10px;
+  padding: 2px 6px;
+  cursor: pointer;
+  background-color: wheat;
+}
+
+.pop-background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  z-index: 1040;
+  overflow: scroll;
+}
+
+.pop {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5% 20%;
+  padding-bottom: 5%;
+  border-radius: 1em;
+}
+
+.pop h2 {
+  font-size: 2.5em;
+}
+
+.pop h3 {
+  font-size: 2em;
+}
+
+.pop p {
+  margin: auto;
+  font-size: large;
+  margin-bottom: 30px;
+}
+
+.pop-image {
+  /* height: 200px; */
+  width: 50%;
+  margin: 5%;
+  border-radius: 100%;
+}
+
+.close-cross {
+  width: 30px;
+  position: relative;
+  left: 45%;
+  top: 0.5em;
+  cursor: pointer;
+}
+
+.instruction-container {
+  margin: auto 5%;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  justify-content: start;
+  width: 100%;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.comments-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.add-comment-container input,
+.add-comment-container textarea {
+  padding: 7px;
+  border-radius: 0.5em;
+  border: 1px solid rgb(192, 192, 192);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.submit-btn {
+  background-color: rgba(248, 57, 57, 0.915);
+  color: #fff;
+  width: 60%;
+  border: none;
+  padding: 7px;
+  border-radius: 0.5em;
+}
+
+#mealsCount {
+  color: #fff;
+  margin-left: -20px;
+  margin-right: 20px;
+}

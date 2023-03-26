@@ -5,7 +5,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 MealsDB ](#about-project)
+- [📖 MealsDB (JavaScript Capstone) ](#-mealsdb-javascript-capstone-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
@@ -141,7 +141,10 @@ Get a hosting website and give all of the github files
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> No features in near future
+- Search will be available soon
+- Search by name
+- Search by ingredients
+- Ingredients will also be shown 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

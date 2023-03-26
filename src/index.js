@@ -2,7 +2,7 @@ import './style.css';
 import navLogo from './images/restaurant.png';
 import crossIcon from './images/remove.png';
 import getComments from './modules/getComment.js';
-import submit from './modules/postComment';
+import postComment from './modules/postComment.js';
 import commentCounter from './modules/commentCounter.js';
 
 document.querySelector('.nav-logo').src = navLogo;
@@ -195,7 +195,7 @@ const popup = async (e) => {
   submitBtn.className = 'submit-btn';
   submitBtn.innerHTML = 'Comment';
   submitBtn.addEventListener('click', () => {
-    submit(mealItem.id);
+    postComment(mealItem.id);
   });
   commentForm.appendChild(formTitle);
   commentForm.appendChild(nameInput);

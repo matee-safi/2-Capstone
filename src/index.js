@@ -2,8 +2,9 @@ import './style.css';
 import navLogo from './images/restaurant.png';
 import crossIcon from './images/remove.png';
 import getComments from './modules/getComment.js';
-import postComment from './modules/postComment.js';
 import commentCounter from './modules/commentCounter.js';
+import postComment from './modules/postComment.js';
+import countMeals from './counteMeal.js';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -28,7 +29,7 @@ async function fetchMealById(id) {
   const data = await response.json();
   return data.meals[0];
 }
-// Function to add a like for a meal by ID
+
 async function addLikeById(id) {
   const response = await fetch(`${API_LINK}apps/${INVOLV_API_KEY}/likes/`, {
     method: 'POST',
@@ -40,9 +41,10 @@ async function addLikeById(id) {
     },
   });
   if (response) {
-    // eslint-disable-next-line no-useless-concat
-    const likesSpan = document.getElementById(`${`${id}` + 'likes'}`);
-    likesSpan.innerText = parseInt(likesSpan.innerText, 10) + 1;
+    const likesSpan = document.getElementById(`${id}likes`);
+    if (likesSpan) {
+      likesSpan.innerText = parseInt(likesSpan.innerText, 10) + 1;
+    }
   }
 
   return 'worked';
@@ -58,30 +60,44 @@ async function fetchLikes() {
   const data = response.json();
   return data;
 }
-
-// Function to display meals list
 async function displayMeals() {
+//  document.getElementById('mealsCount').innerText = `(${countMeals(meals.length)})`;
+  const updateMealsCount = (meals) => {
+    const count = countMeals(meals.length);
+    document.getElementById('mealsCount').innerText = `(${count})`;
+  };
+  // fetch meals data from API
+  fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/')
+    .then((response) => response.json())
+    .then((data) => {
+    // call updateMealsCount function with meals data
+      updateMealsCount(data.meals);
+    });
+  // .catch((error) => {
+  /// /  console.error('Error fetching meals:', error);
+  // });
+
   const meals = await fetchMeals();
   mealsList.innerHTML = meals
     .map((meal) => `
-        <li id="${meal.idMeal}">
-          <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-          <div><span>${meal.strMeal}</span>
-          <button id="${meal.idMeal}" class="like-btn">
-            <i style="pointer-events: none;" class="fas fa-heart">Like</i>
-            <span style="pointer-events: none;" id="${`${meal.idMeal}likes`}" >0</span>
-          </button></div>
-          <button class="comment-btn">Comment</button>
-          <button class="reservation-btn">Reservations</button>
-        </li>
-      `)
+          <li id="${meal.idMeal}">
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            <div><span>${meal.strMeal}</span>
+            <button id="${meal.idMeal}" class="like-btn">
+              <i style="pointer-events: none;" class="fas fa-heart">Like</i>
+              <span style="pointer-events: none;" id="${`${meal.idMeal}likes`}" >0</span>
+            </button></div>
+            <button class="comment-btn">Comment</button>
+            <button class="reservation-btn">Reservations</button>
+          </li>
+        `)
     .join('');
 
-  fetchLikes().then((res) => {
-    res.forEach((item) => {
-      if (item.item_id !== 'undefined' && item.item_id !== '123') {
-        const likesSpan = document.getElementById(`${`${item.item_id}likes`}`);
-        likesSpan.innerHTML = item.likes;
+  fetchLikes().then((likes) => {
+    likes.forEach((like) => {
+      const likesSpan = document.getElementById(`${like.item_id}likes`);
+      if (likesSpan) {
+        likesSpan.innerText = like.likes;
       }
     });
   });
@@ -97,6 +113,23 @@ async function displayMeals() {
     });
   });
 }
+
+// Set the likes to 0 initially
+const likeSpans = document.querySelectorAll('.like-btn span');
+likeSpans.forEach((span) => {
+  span.innerText = '0';
+});
+
+const likeButtons = document.querySelectorAll('.like-btn');
+
+likeButtons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    if (e.target.className === 'like-btn') {
+      const mealId = e.target.id;
+      addLikeById(mealId);
+    }
+  });
+});
 
 // Function to display meal details
 async function displayMealDetails(id) {

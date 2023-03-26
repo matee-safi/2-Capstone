@@ -1,4 +1,4 @@
-import countMeals from '../src/counteMeal.js';
+import countMeals from '../src/modules/counteMeal';
 
 const mockCount = 4;
 test('Count 4', () => {

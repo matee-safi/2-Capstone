@@ -238,3 +238,9 @@ li div {
   padding: 7px;
   border-radius: 0.5em;
 }
+
+#mealsCount {
+  color: #fff;
+  margin-left: -20px;
+  margin-right: 20px;
+}

@@ -1,5 +1,5 @@
 const countMeals = (count) => {
-  //  console.log(count);
+  console.log(count);
   const totalMeals = typeof count === 'number' && count;
   return totalMeals;
 };

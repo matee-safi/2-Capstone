@@ -4,7 +4,7 @@ import crossIcon from './images/remove.png';
 import getComments from './modules/getComment.js';
 import commentCounter from './modules/commentCounter.js';
 import postComment from './modules/postComment.js';
-import countMeals from './counteMeal.js';
+import countMeals from './modules/counteMeal';
 
 document.querySelector('.nav-logo').src = navLogo;
 
@@ -20,6 +20,7 @@ const mealDetails = document.querySelector('#meal-details');
 async function fetchMeals() {
   const response = await fetch(`${API_URL}/search.php?s=`);
   const data = await response.json();
+  document.getElementById('mealsCount').innerText = `(${data.meals.length})`;
   return data.meals;
 }
 
@@ -61,7 +62,6 @@ async function fetchLikes() {
   return data;
 }
 async function displayMeals() {
-//  document.getElementById('mealsCount').innerText = `(${countMeals(meals.length)})`;
   const updateMealsCount = (meals) => {
     const count = countMeals(meals.length);
     document.getElementById('mealsCount').innerText = `(${count})`;

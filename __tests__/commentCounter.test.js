@@ -1,4 +1,4 @@
-import commentCounter from './commentCounter.js';
+import commentCounter from '../src/modules/commentCounter';
 
 const comments = [
   {
